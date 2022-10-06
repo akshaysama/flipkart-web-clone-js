@@ -1,0 +1,133 @@
+body{
+    padding: 0;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Roboto','sans-sherif';
+}
+.header-main-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+    background-color:rgb(40,116,240);
+}
+.header-flex-box-one{
+    display: flex;
+}
+.header-flipkart-logo{
+    max-width: 23px;
+}
+.header-flipkart-logo img{
+    width: 100%;
+}
+.header-flex-box-two{
+    display: flex;
+}
+.image-div{
+    width: 42px;
+    height:52px;
+    display: flex;
+    align-items: center;
+    justify-content:center
+}
+.image-div a{
+    width: 42px;
+    height:52px;
+    display: flex;
+    align-items: center;
+    justify-content:center
+}
+.header-flex-box-one > div{
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header-span{
+    padding-left:12px;
+}
+.header-flipkart-logo img{
+    padding-top: 2px;
+}
+.header-login-div{
+    width: 66px;
+   
+}
+.header-login-div a{
+    text-decoration: none;
+    color: #eaeaea; 
+    line-height: 10px;
+    letter-spacing: -0.15px;
+}
+.header-flex-box-two > div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+}
+.shopping-cart-svg-header a{
+    width: 42px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header-search-bar a{
+    width: 42px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+}
+.header-span span{
+    color: white;
+    letter-spacing: -0.19px;
+}
+.header-second-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    box-shadow: 0px 1px 3px #b5a6a6;
+}
+.header-sort, .header-sort img{
+    height: 24px;
+    width: 24px;
+}
+.header-sort-container > div + div{
+    font-size: 14px;
+    font-family: serif;
+}
+.filter-text{
+    font-size: 14px;
+    font-family: serif;
+}
+.filter{
+    width: 24px;
+    height: 24px;
+
+}
+.filter img{
+    width: 100%;
+}
+.header-sort-container,.header-popularity-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sort-container, .header-popularity-main-container{
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header-sort,.filter{
+    margin-right: 8px;
+}
+.border-div{
+    width: 1px;
+    height: 100%;
+    background-color: rgba(234,234,234,1.00);;
+}
