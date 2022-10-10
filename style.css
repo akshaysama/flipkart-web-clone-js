@@ -230,7 +230,7 @@ body{
     padding-right: 20px;
     margin-top: 10px;
     margin-bottom: 2px;
-    /* position: relative; */
+    position: relative;
 
 }
 .second-card-second-child{
@@ -352,8 +352,8 @@ justify-content: center;
     padding-top: 2px;
     position: absolute;
     z-index: 8;
-    top: 8px;
-    right: 8px;
+    top: -14px;
+    right: 5px;
     background-color: rgba(255,255,255,1.00);
     box-shadow: 0px 1px 3px rgb(0 0 0 / 16%);
     border-radius: 100%;
@@ -366,9 +366,9 @@ justify-content: center;
     width: 18px;
     height: 16px;
 }
-.section-card-main-container{
+/* .section-card-main-container{
     position: relative;
-}
+} */
 .top-sale-deals-content-container{
     display: flex;
     align-items: center;

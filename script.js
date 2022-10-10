@@ -6,6 +6,8 @@ const boody = document.querySelector('body')
 var arrey = []
 let arrayElem=[]
 let marginsZero
+let arrayPrice = []
+let indexForPriceSorting =[]
 
 function createELE(ele,ment,name){
     let a = document.createElement(ele)
@@ -15,7 +17,7 @@ function createELE(ele,ment,name){
     a.classList.add(name)
     return(a)
 }
-let svgPathAll,flipKartLogo,mobileName,sortImg,sortByFixedImg,imageData,name,rating,logo,realPrice,discount,discountTag,deliveryStatus,offer,srcAd,borderImg,ratingLogo,ratingNumber,deviceSpec,deviceDim,battery,camera,sortByFixed,luvSvg,imageHref,imageTopDeals,image,topDealsText,emiAvailable,exchangeText,emiTag,discountPriceArray;
+let svgPathAll,flipKartLogo,mobileName,sortImg,sortByFixedImg,imageData,name,rating,logo,realPrice,discount,discountTag,deliveryStatus,offer,srcAd,borderImg,ratingLogo,ratingNumber,deviceSpec,deviceDim,battery,camera,sortByFixed,luvSvg,imageHref,imageTopDeals,image,topDealsText,emiAvailable,exchangeText,emiTag,discountPriceArray,realPriceNew,realPriceNewNumber,realPriceNewNew,realPriceNewNewNumber,sortedArray,priceHightoLow,priceHightoLowTwo;
 const svgPath = dataBase.map((a)=>{
     if(a.name==="header"){
         svgPathAll = a.svgpath
@@ -58,6 +60,10 @@ const svgPath = dataBase.map((a)=>{
         luvSvg = a.luvSvg
         exchangeText =a.exchangeText
         emiTag = a.emiTag
+        realPriceNew = a.realPrice.split(',')
+        realPriceNewNew = a.realPrice.split(',')
+        priceHightoLow = a.realPrice.split(',')
+        priceHightoLowTwo = a.realPrice.split(',')
         
     }
     if(a.name ==="header-border"){
@@ -143,73 +149,149 @@ setTimeout(()=>{
 // createElm.classList.add('sorting-third-child-child')
 
 }
+
 const sortByFixedChildThree = document.querySelectorAll('.sort-by-fixed-child-three')
-sortByFixedChildThree[0].addEventListener('click',(a)=>{
- 
+sortByFixedChildThree[1].addEventListener('click',(a)=>{
+
 })
-sortByFixedChildThree.forEach((a)=>{a.addEventListener('click',()=>{
-    console.log('hoooyyy')
+sortByFixedChildThree[2].addEventListener('click',(a)=>{
     const sectionMainContainer= document.querySelector('.section-main-container')
-    console.log(result)
+sectionMainContainer.innerHTML = ``
+let h = 0
+
+
+    for(indexForPriceSorting[h];h<6;indexForPriceSorting[h+1]){
+        let i = parseInt(result[h])
+        console.log('hiii')
+        sectionMainContainer.innerHTML +=`<div class ="section-card-main-container">
+                                      <div class="card-first-section">
+                                    
+                                        <div class="card-first-section-mobile-image" data-rating="${rating[i]}"><img src ="${imageData[i]}"> </div>
+                                        <div class="card-first-section-flex-container">
+                                        <div class="card-luv-logo"><div class="luv-svg-container"><img src="${luvSvg}"></div></div>
+                                        <div class="card-second-section-container"><div class="second-card-mobile-details">${name[i]}</div><div class="second-card-second-child"><div class="popularity"><div class="second-card-second-child-first-child"><div class="second-card-second-child-first-child-rating">${rating[i]}</div><div class="second-card-second-child-first-child-logo">${ratingLogo}</div></div><div class="rated-count">${ratingNumber[i]}</div></div><div></div><div class="second-card-second-child-second-child"><img src="${logo}"></div></div><div class="second-section-third-child-flex"><div class="second-card-third-child"><div class="second-card-third-child-price">${priceCalc[i]}</div><div class="third-child-discount-price">${discountPriceArray}</div><div class="second-card-third-child-text">${discount[i]}${discountTag}</div></div><div class="delivery-status">${deliveryStatus}</div></div><div class="second-card-last-child">${offer[i]}</div></div>
+                                      </div></div>
+                                      <div class="card-second-section">
+                                      <div class="card-second-section-child">
+                                      <div class="card-second-section-child-child">${deviceSpec[i]}</div></div>
+                    
+                                       <div class="card-second-section-child">
+                                       <div class="card-second-section-child-child">${deviceDim[i]}
+                                       </div>
+                                       </div>
+                                       <div class="card-second-section-child">
+                                       <div class="card-second-section-child-child">${battery[i]}</div></div>                  
+                                       <div class="card-second-section-child">
+                                       <div class="card-second-section-child-child">${camera[i]}</div>                                  
+                                      </div>`
+                                        marginsZero = document.querySelectorAll('.third-child-discount-price')
+                                        discount[i] = parseInt(discount[i]) 
+                                        console.log(typeof discount[i])                      
+                                        if(discount[i]===0){
+                                            let requiredIndex = i
+                                            console.log(i)
+                                            const secondCardThirdChild = document.querySelectorAll('.second-card-third-child-text')
+                                            const marginZero = document.querySelectorAll('.third-child-discount-price')
+                                            const secondCard = document.querySelectorAll(".second-card-third-child-price")
+                                            secondCard.forEach((a,i)=>{                 
+                                                 a.style.display = "none"                  
+                                            })
+                                            marginZero.forEach((a)=>{
+                                                        a.style.marginLeft = "0"  
+                                                        console.log(a)                                             
+                                            })
+                                         secondCardThirdChild.forEach((a,i)=>{
+                                            console.log(a)
+                                a.style.display ="none"  
+                                         })
+                                            console.log(secondCard)
+                                        }
+                                        if(emiAvailable[i]!="null"){
+                                        const addEmiField = document.querySelectorAll('.card-second-section-container')
+                                        console.log(addEmiField)
+                                        addEmiField.forEach((a,i)=>{
+                                            console.log('hiiii')
+                                            if(emiAvailable[i]!="null"){
+                                            a.innerHTML += `<div class="emi-text">${exchangeText}</div><div class="card-emi-details">${emiTag}</div>`}
+                                        })
+                                        const changeHeight = document.querySelectorAll('.card-first-section')
+                                        const secondCardLastChild = document.querySelectorAll(".second-card-last-child")
+                                        secondCardLastChild.forEach((a,i)=>{
+                                            if(emiAvailable[i]!="null"){
+                                                a.style.display = "none"
+                                               }
+                                        })
+                                        changeHeight.forEach((a,i)=>{
+                                           if(emiAvailable[i]!="null"){
+                                            a.style.height = "162px";
+                                           }
+                                        })
+                                        }
+                                    h=h+1
+                                  if(h===6){
+                                    callStyleFun()
+                                    return 0
+                                  }
+                                }
+})
+sortByFixedChildThree[0].addEventListener('click',(a)=>{
+
+    const sectionMainContainer= document.querySelector('.section-main-container')
+
     let d = 0
 sectionMainContainer.innerHTML = ``
     
     for(result[d];d<6;result[d+1]){
        
        let i =parseInt(result[d])
-       console.log(typeof i)
+    
        
 console.log(imageData[i])
     sectionMainContainer.innerHTML +=`<div class ="section-card-main-container">
                                          <div class="card-first-section">
-                                         <div class="card-luv-logo"><div class="luv-svg-container"><img src="${luvSvg}"></div></div>
                                            <div class="card-first-section-mobile-image" data-rating="${rating[i]}"><img src ="${imageData[i]}"> </div>
                                            <div class="card-first-section-flex-container">
+                                           <div class="card-luv-logo"><div class="luv-svg-container"><img src="${luvSvg}"></div></div>
                                            <div class="card-second-section-container"><div class="second-card-mobile-details">${name[i]}</div><div class="second-card-second-child"><div class="popularity"><div class="second-card-second-child-first-child"><div class="second-card-second-child-first-child-rating">${rating[i]}</div><div class="second-card-second-child-first-child-logo">${ratingLogo}</div></div><div class="rated-count">${ratingNumber[i]}</div></div><div></div><div class="second-card-second-child-second-child"><img src="${logo}"></div></div><div class="second-section-third-child-flex"><div class="second-card-third-child"><div class="second-card-third-child-price">${priceCalc[i]}</div><div class="third-child-discount-price">${discountPriceArray}</div><div class="second-card-third-child-text">${discount[i]}${discountTag}</div></div><div class="delivery-status">${deliveryStatus}</div></div><div class="second-card-last-child">${offer[i]}</div></div>
                                          </div></div>
-            
                                          <div class="card-second-section">
                                          <div class="card-second-section-child">
                                          <div class="card-second-section-child-child">${deviceSpec[i]}</div></div>
-                                      
-    
                                          <div class="card-second-section-child">
                                          <div class="card-second-section-child-child">${deviceDim[i]}
                                          </div>
                                          </div>
-                
                                          <div class="card-second-section-child">
                                          <div class="card-second-section-child-child">${battery[i]}</div></div>                  
                                          <div class="card-second-section-child">
                                          <div class="card-second-section-child-child">${camera[i]}</div>                                  
                                         </div>`
                                          marginsZero = document.querySelectorAll('.third-child-discount-price')
-                                       arrey = [];
-                                        for (var f = 0, ref = arrey.length = marginsZero.length; f < ref; f++) {
-                                         arrey[f] = marginsZero[f];
-                                         console.log(arrey)
-                                        }
+                                    //    arrey = [];
+                                    //     for (var f = 0, ref = arrey.length = marginsZero.length; f < ref; f++) {
+                                    //      arrey[f] = marginsZero[f];
+                                    //      console.log(arrey)
+                                    //     }
                                         
-
-           discount[i] = parseInt(discount[i]) 
-            console.log(typeof discount[i])                      
-            if(discount[i]===0){
-                let requiredIndex = i
-                console.log(i)
-                const secondCardThirdChild = document.querySelectorAll('.second-card-third-child-text')
-                const marginZero = document.querySelectorAll('.third-child-discount-price')
-                const secondCard = document.querySelectorAll(".second-card-third-child-price")
-                secondCard.forEach((a,i)=>{                 
-                     a.style.display = "none"                  
-                })
-                marginZero.forEach((a)=>{
-                            a.style.marginLeft = "0"  
-                            console.log(a)                                             
-                })
-             secondCardThirdChild.forEach((a,i)=>{
-                console.log(a)
+discount[i] = parseInt(discount[i]) 
+ console.log(typeof discount[i])                      
+ if(discount[i]===0){
+     let requiredIndex = i
+     console.log(i)
+     const secondCardThirdChild = document.querySelectorAll('.second-card-third-child-text')
+     const marginZero = document.querySelectorAll('.third-child-discount-price')
+     const secondCard = document.querySelectorAll(".second-card-third-child-price")
+     secondCard.forEach((a,i)=>{                 
+          a.style.display = "none"                  
+     })
+     marginZero.forEach((a)=>{
+                 a.style.marginLeft = "0"  
+                 console.log(a)                                             
+     })
+  secondCardThirdChild.forEach((a,i)=>{
+     console.log(a)
     a.style.display ="none"  
-             })
+   })
                 console.log(secondCard)
             }
             if(emiAvailable[i]!="null"){
@@ -241,6 +323,10 @@ console.log(imageData[i])
     }
     console.log('hiii')
     }
+ console.log('huray')
+})
+sortByFixedChildThree.forEach((a)=>{a.addEventListener('click',()=>{
+ 
     const sortByFixedIcon = a.querySelectorAll('.fixed-sort-by-icon')
 sortByFixedIcon[0].innerHTML = `<img src="${sortByFixedImg[1]}">`
 console.log(sortByFixedIcon)
@@ -287,19 +373,14 @@ setTimeout(()=>{
 //     a>b?-1:0;
 // })
 let index
-console.log(rating)
 let arr = []
 let arrOne
 let arr3 =[]
-console.log(arr)
   arr = rating.slice(0,rating.length)
   arrOne = rating.slice(0,rating.length)
-  console.log(arrOne)
   let numbrsTwo = arrOne.map(Number)
-  console.log(numbrsTwo)
   let numbers = arr.map(Number)
- console.log(numbers)
-console.log(numbers.sort((a,b)=>{
+numbers.sort((a,b)=>{
     if(a>b){
         return -1
     }{
@@ -310,11 +391,11 @@ console.log(numbers.sort((a,b)=>{
             return 0
         }
     }
-}))
+})
 numbers.map((a,i)=>{
 // if(a[i]===numbrsTwo[i]){
 //     console.log('hii')
-// }
+// }    savingg index for popularityyyy
 for(let b=0;b<7;b++){
  if(a===numbrsTwo[b]){
     console.log('hellooo')
@@ -332,6 +413,50 @@ for (let i = 0; i < arr4.length; ++i) {
     if (arr4[i] == arr4[i + 4] || (arr4[i]==arr4[i+2])) continue
     result.push(arr4[i])
   }
+
+  //////// for price high to low
+  
+
+realPriceNewNumber = realPriceNew.map(Number)
+realPriceNewNewNumber = realPriceNewNew.map(Number)
+ sortedArray = realPriceNewNumber.sort((a,b)=>{
+    if(a>b){
+        return -1
+    }
+    if(a<b){
+        return 1
+    }
+    if(a===b){
+        return 0
+    }
+ })
+console.log(realPriceNewNewNumber)
+console.log(sortedArray)
+//  for(let i =0;i<realPriceNewNewNumber.lenght;i++){
+//     for(let j=0;j<sortedArray.length;j++){
+//         if(realPriceNewNewNumber[i]===sortedArray[j]){
+//             console.log('sorted')
+//         }
+//     }
+//  }
+sortedArray.map((a,i)=>{
+    for(let g=0;g<7;g++){
+        if(a===realPriceNewNewNumber[g]){
+            console.log(g)
+            indexForPriceSorting+=parseInt(g)
+            
+        }
+    }
+})
+
+indexForPriceSorting = indexForPriceSorting.split('')
+
+console.log(indexForPriceSorting)
+
+///////// for price high  
+
+
+
 console.log(result)
 console.log(rating)
 const body = document.querySelector('body')
@@ -370,9 +495,10 @@ for(let i = 0;i<rating.length; i++){
 
 sectionMainContainer.innerHTML += `<div class ="section-card-main-container">
                                      <div class="card-first-section">
-                                     <div class="card-luv-logo"><div class="luv-svg-container"><img src="${luvSvg}"></div></div>
+                                    
                                        <div class="card-first-section-mobile-image" data-rating="${rating[i]}"><img src ="${imageData[i]}"> </div>
                                        <div class="card-first-section-flex-container">
+                                       <div class="card-luv-logo"><div class="luv-svg-container"><img src="${luvSvg}"></div></div>
                                        <div class="card-second-section-container"><div class="second-card-mobile-details">${name[i]}</div><div class="second-card-second-child"><div class="popularity"><div class="second-card-second-child-first-child"><div class="second-card-second-child-first-child-rating">${rating[i]}</div><div class="second-card-second-child-first-child-logo">${ratingLogo}</div></div><div class="rated-count">${ratingNumber[i]}</div></div><div></div><div class="second-card-second-child-second-child"><img src="${logo}"></div></div><div class="second-section-third-child-flex"><div class="second-card-third-child"><div class="second-card-third-child-price">${priceCalc[i]}</div><div class="third-child-discount-price">${discountPriceArray}</div><div class="second-card-third-child-text">${discount[i]}${discountTag}</div></div><div class="delivery-status">${deliveryStatus}</div></div><div class="second-card-last-child">${offer[i]}</div></div>
                                      </div></div>
         
@@ -478,6 +604,18 @@ function coo(){
     }
     
 }
+}
+function callStyleFun(){
+
+    for(let i=0; i<marginsZero.length;i++){
+        let i = parseInt(indexForPriceSorting[d])
+        marginsZero[0].innerHTML = `₹${priceCalc[2]}`
+        marginsZero[1].innerHTML = `₹${priceCalc[3]}`
+        marginsZero[2].innerHTML =`₹${priceCalc[5]}`
+        marginsZero[3].innerHTML =`₹${priceCalc[4]}`
+        marginsZero[4].innerHTML =`${arrayElem[0]}`
+        marginsZero[5].innerHTML =`${arrayElem[1]}`
+    }
 }
 
   
