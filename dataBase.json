@@ -51,9 +51,72 @@
        "exchangeText":"Upto ₹18,900 Off on Exchange"
     },
     {
-      "newSection": {
-                 
+        "name": "newSectionCard",
+        "id": 1,
+        "imgSrc": "https://rukminim1.flixcart.com/image/200/250/l13whow0/mobile/0/6/7/note-11-pro-plus-5g-2201116si-redmi-original-imagcqr7spupzwtz.jpeg?q=90&crop=false",
+        "mobileName": "Redmi Note 11 PRO Plus 5G (Mirage Blue, 128 GB)",
+        "rating": 4.2,
+        "ratingNumber": "(1,395)",
+        "plusLogo": "https://rukminim1.flixcart.com/www/150/30/promos/07/06/2022/afa33081-fdc2-4dac-af42-7f99ff316372.png?q=90",
+        "grossPrice": 8190,
+        "priceTag": "₹",
+        "releaseYear":2022,
+        "discount":11,
+        "discountTag":"% off",
+        "deliveryStatus": "free delivery",
+        "offer": {
+            "offer": "bankOffer"
+        },
+        "deviceSpec": {
+            "specOne": "8 GB RAM | 128 GB Storage",
+            "specTwo": "16.94 cm (6.67 inch) Display",
+            "specThree": "5000 mAh",
+            "specFour": "108Mp Rear Camera"
         }
+    },
+      {  "name":"newSectionCard",
+        "id": 2,
+        "imgSrc": "https://rukminim1.flixcart.com/image/200/250/ku5ufm80/mobile/8/b/1/sport-9a-redmi-original-imag7chjvhxdhhyh.jpeg?q=90&crop=false",
+        "mobileName": "Redmi 9A Sport (Carbon Black, 32 GB)",
+        "rating": 4.1,
+        "ratingNumber": "8190",
+        "grossPrice": 7768,
+        "discount":15,
+        "discountTag":"% off",
+        "releaseYear":2019,
+        "deliveryStatus": "free delivery",
+        "offer": {
+            "offer": "bankOffer"
+      },
+        "deviceSpec": {
+            "specOne": "3 GB RAM | 32 GB Storage",
+            "specTwo": "16.59 cm (6.53 inch) Display",
+            "specThree": "5000 mAh",
+            "specFour": "50MP Rear Camera"
+        }
+    },
+    {
+        "name":"newSectionCard",
+        "id":3,
+        "imgSrc":"https://rukminim1.flixcart.com/image/200/250/l01blow0/mobile/g/y/k/note-11s-2201117sl-redmi-original-imagbwx4ahgqxgg9.jpeg?q=90&crop=false",
+        "mobileName":"Redmi Note 11S (Space Black, 128 GB)",
+        "rating":5,
+        "discount":12,
+        "discountTag":"% off",
+        "ratingNumber":"545",
+        "releaseYear":2021,
+        "grossPrice":17189,
+        "deliveryStatus":"free delivery",
+        "offer":{
+            "offer":"bankOffer"
+        },
+        "deviceSpec":{
+            "specOne":"8 GB RAM | 128 GB Storage",
+            "specTwo":"16.33 cm (6.43 inch) Display",
+            "specThree":"500 mAh",
+            "specFour":"50MP Rear Camera"
+        }
+
     }
 
 ]

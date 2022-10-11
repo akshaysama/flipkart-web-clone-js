@@ -428,3 +428,17 @@ justify-content: center;
 .margin-third-class{
 margin-left: 0;
 }
+.pagination-container{
+    margin-top: 20px;
+    display: flex;
+    border: 1px solid #b5a6a6;
+    padding: 30px;
+    justify-content: space-evenly;
+}
+.pagination-child-buttons{
+    background-color:rgba(105,105,105,1);
+    color: white;
+    font-weight: 800;
+    border: none;
+    border-radius: 6px;
+}

@@ -712,4 +712,104 @@ function addPriceTagFun(){
     }
 }
 
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////\
+createELE("div", "body", "pagination-container");
+let paginationContainerdivName = [
+  "pagination-first-child",
+  "pagination-second-child",
+  "pagination-third-child",
+];
+for (let i = 0; i < paginationContainerdivName.length; i++) {
+  createELE("div", ".pagination-container", paginationContainerdivName[i]);
+  let saveEle = createELE(
+    "button",
+    "." + paginationContainerdivName[i],
+    "pagination-child-buttons"
+  );
+  saveEle.textContent = `${i}`;
+}
+
+let i = 0;
+let imageSrc = [];
+//////////array has each json objects//////
+let array = [];
+dataBase.map((a) => {
+  if (a.name === "newSectionCard") {
+    imageSrc[i] = a.rating;
+
+    array[i] = a;
+    i++;
+  }
+
+  //   if(a.name ==='newSectionCard'){
+
+  // console.log(i)
+  // imageSrc[i] = a.imgSrc
+  // console.log(a.imgSrc)
+  // i++
+  //   }
+});
+function sortByPopularity(){
+array = array.sort(function (a, b) {
+  return b.rating - a.rating;
+});}
+function sortByPriceHighToLow(){
+  array =array.sort(function(a,b){
+    return b.grossPrice - a.grossPrice
+  })
+}
+function sortByPriceLowToHigh(){
+  array.sort((a, b) => (a.grossPrice > b.grossPrice ? 1 : -1))
+}
+
+console.log(array);
+function sortByReleaseYear(){
+  array.sort((a,b)=>{
+    return b.releaseYear - a.releaseYear
+  })
+}
+
+// bodyElement.innerHTML += `<div class="pagination-container"></div>`
+const section = document.querySelector("section");
+console.log(section);
+const newSection = document.createElement("div");
+newSection.classList.add("new-section-container");
+section.appendChild(newSection);
+
+
+for (let i = 0; i < array.length; i++) {
+  let discountValue = (array[i].grossPrice * array[i].discount) / 100;
+  console.log(discountValue)
+  let discountPrice = '₹'+ parseInt(array[i].grossPrice - discountValue);
+  console.log(discountPrice)
+  console.log(array[i].offer.offer);
+  newSection.innerHTML += `<div class ="section-card-main-container">
+<div class="card-first-section">
+
+  <div class="card-first-section-mobile-image" data-rating=""><img src ="${array[i].imgSrc}"></div>
+  <div class="card-first-section-flex-container">
+  <div class="card-luv-logo"><div class="luv-svg-container"><img src="${luvSvg}"></div></div>
+  <div class="card-second-section-container"><div class="second-card-mobile-details">${array[i].mobileName}</div><div class="second-card-second-child"><div class="popularity"><div class="second-card-second-child-first-child"><div class="second-card-second-child-first-child-rating">${array[i].rating}</div><div class="second-card-second-child-first-child-logo">${ratingLogo}</div></div><div class="rated-count">${array[i].ratingNumber}</div></div><div></div><div class="second-card-second-child-second-child"><img src="${logo}"></div></div><div class="second-section-third-child-flex"><div class="second-card-third-child"><div class="second-card-third-child-price">${array[i].grossPrice}</div><div class="third-child-discount-price">${discountPrice}</div><div class="second-card-third-child-text">${array[i].discount}${array[i].discountTag}</div></div><div class="delivery-status">${array[i].deliveryStatus}</div></div><div class="second-card-last-child">${array[i].offer.offer}</div></div>
+</div></div>
+
+<div class="card-second-section">
+<div class="card-second-section-child">
+<div class="card-second-section-child-child">${deviceSpec[i]}</div></div>
+
+
+<div class="card-second-section-child">
+<div class="card-second-section-child-child">${deviceDim[i]}
+</div>
+</div>
+
+<div class="card-second-section-child">
+<div class="card-second-section-child-child">${battery[i]}</div></div>                  
+<div class="card-second-section-child">
+<div class="card-second-section-child-child">${camera[i]}</div>                                  
+</div>`;
+}
+
   
