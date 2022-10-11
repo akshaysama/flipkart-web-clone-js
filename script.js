@@ -2,42 +2,40 @@ import dataBase from"./dataBase.json" assert{type:"json"}
 const header = document.querySelector('.header-main-container')
 const headerEl = document.querySelector('header')
 const headerMain = document.querySelector("header")
-const boody = document.querySelector('body')
-var arrey = []
+const bodyElement = document.querySelector('body')
+let indexLowToHigh=[]
 let arrayElem=[]
-let marginsZero
-let arrayPrice = []
+let mobileCardDiscountPrice
 let indexForPriceSorting =[]
 
-function createELE(ele,ment,name){
-    let a = document.createElement(ele)
-    let b = document.querySelector(ment)
-
+function createELE(elementCreate,appendTo,Classname){
+    let a = document.createElement(elementCreate)
+    let b = document.querySelector(appendTo)
     b.appendChild(a)
-    a.classList.add(name)
+    a.classList.add(Classname)
     return(a)
 }
-let svgPathAll,flipKartLogo,mobileName,sortImg,sortByFixedImg,imageData,name,rating,logo,realPrice,discount,discountTag,deliveryStatus,offer,srcAd,borderImg,ratingLogo,ratingNumber,deviceSpec,deviceDim,battery,camera,sortByFixed,luvSvg,imageHref,imageTopDeals,image,topDealsText,emiAvailable,exchangeText,emiTag,discountPriceArray,realPriceNew,realPriceNewNumber,realPriceNewNew,realPriceNewNewNumber,sortedArray,priceHightoLow,priceHightoLowTwo;
+let headerSvgPath,flipKartLogo,headerTexts,sortMenuImg,sortByMenuOptionsImg,mobileCardImages,name,rating,logo,realPrice,discount,discountTag,deliveryStatus,offer,advertisementImgSrc,borderImg,ratingLogo,ratingNumber,deviceSpec,deviceDim,battery,camera,sortByMenuOptions,luvSvg,imageHref,imageTopDeals,image,topDealsText,emiAvailable,exchangeText,emiTag,discountPriceArray,realPriceNew,realPriceNewNumber,realPriceNewNew,realPriceNewNewNumber,sortedArray,mobilePrice,mobilePriceTwo,mobilePriceSorted;
 const svgPath = dataBase.map((a)=>{
     if(a.name==="header"){
-        svgPathAll = a.svgpath
+        headerSvgPath = a.svgpath
         flipKartLogo = a.headerimage
-        mobileName = a.headerTag.split(',')
+        headerTexts = a.headerTag.split(',')
     }
     
     if(a.name==="headersort"){
-     sortImg = a.imgandtext
+     sortMenuImg = a.imgandtext
     }
     if(a.name ==="sortBy"){
-     sortByFixed = a.tags.split(',')
-     sortByFixedImg = a.popularityMarker.split(',')
+     sortByMenuOptions = a.tags.split(',')
+     sortByMenuOptionsImg = a.popularityMarker.split(',')
     }
     if(a.name === "advertisement"){
-        srcAd = a.src
+        advertisementImgSrc = a.src
     }
     if(a.name === "cardOne"){
-        imageData =  a.img.split('!')
-        name = a.mobileName.split('-')
+        mobileCardImages =  a.img.split('!')
+        name = a.headerTexts.split('-')
         rating = a.rating.split(',')
         logo =a.plusLogo
         realPrice = a.realPrice.split(',')
@@ -62,9 +60,8 @@ const svgPath = dataBase.map((a)=>{
         emiTag = a.emiTag
         realPriceNew = a.realPrice.split(',')
         realPriceNewNew = a.realPrice.split(',')
-        priceHightoLow = a.realPrice.split(',')
-        priceHightoLowTwo = a.realPrice.split(',')
-        
+        mobilePrice = a.realPrice.split(',')
+        mobilePriceTwo = a.realPrice.split(',')    
     }
     if(a.name ==="header-border"){
     borderImg =  a.src
@@ -78,8 +75,8 @@ const svgPath = dataBase.map((a)=>{
         emiAvailable = a.emiAvailable.split(',')
     }
     // if(a.name === "cardTwo"){
-    //      imageDatatwo =  a.img
-    //      nametwo = a.mobileName
+    //      mobileCardImagestwo =  a.img
+    //      nametwo = a.headerTexts
     //      ratingtwo = a.rating.split(',')
     //      logotwo =a.plusLogo
     //      realPricetwo = a.realPrice
@@ -91,9 +88,9 @@ const svgPath = dataBase.map((a)=>{
     //  }
 })
 console.log(discount)
-console.log(sortByFixedImg)
-sortImg = sortImg.split(',')
-console.log(sortImg[0])
+console.log(sortByMenuOptionsImg)
+sortMenuImg = sortMenuImg.split(',')
+console.log(sortMenuImg[0])
 let priceCalc=[]
  parseInt(realPrice)
 for(let i=0;i<rating.length;i++){
@@ -101,72 +98,144 @@ for(let i=0;i<rating.length;i++){
 }
 console.log(realPrice)
 console.log(priceCalc)
-svgPathAll = svgPathAll.split(',')
-header.innerHTML = `<div class="header-flex-box-one"><div class="image-div"><a href=""><svg width="19" height="16" viewBox="0 0 19 16" xmlns="http://www.w3.org/2000/svg">${svgPathAll[0]}</svg></a></div><div class="header-flipkart-logo"><img src="${flipKartLogo}"></div><div class="header-span"><span>${mobileName[0]}</span></div></div><div class="header-flex-box-two"><div class="header-search-bar"><a href=""><svg fill="#fff" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">${svgPathAll[1]}</svg></a></div><div class="shopping-cart-svg-header"><a href=""><svg width="16" height="16" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">${svgPathAll[2]}</svg></a></div><div class="header-login-div"><a href=""><span>${mobileName[1]}</span><a></div>`
-headerMain.innerHTML += `<div class="border-image"><img src="${borderImg}"></div><div class="header-second-container"><a class="sort-container"><div class="header-sort-container"><div class="header-sort"><img src="${sortImg[0]}"></div><div>${sortImg[2]}</div></div></a><div class="border-div"></div><div class="header-popularity-main-container"><div class="header-popularity-container"><div class="filter"><img src="${sortImg[1]}"</div></div><div class="filter-text">${sortImg[3]}</div></div></div>`
+headerSvgPath = headerSvgPath.split(',')
+header.innerHTML = `<div class="header-flex-box-one"><div class="image-div"><a href=""><svg width="19" height="16" viewBox="0 0 19 16" xmlns="http://www.w3.org/2000/svg">${headerSvgPath[0]}</svg></a></div><div class="header-flipkart-logo"><img src="${flipKartLogo}"></div><div class="header-span"><span>${headerTexts[0]}</span></div></div><div class="header-flex-box-two"><div class="header-search-bar"><a href=""><svg fill="#fff" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">${headerSvgPath[1]}</svg></a></div><div class="shopping-cart-svg-header"><a href=""><svg width="16" height="16" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">${headerSvgPath[2]}</svg></a></div><div class="header-login-div"><a href=""><span>${headerTexts[1]}</span><a></div>`
+headerMain.innerHTML += `<div class="border-image"><img src="${borderImg}"></div><div class="header-second-container"><a class="sort-container"><div class="header-sort-container"><div class="header-sort"><img src="${sortMenuImg[0]}"></div><div>${sortMenuImg[2]}</div></div></a><div class="border-div"></div><div class="header-popularity-main-container"><div class="header-popularity-container"><div class="filter"><img src="${sortMenuImg[1]}"</div></div><div class="filter-text">${sortMenuImg[3]}</div></div></div>`
 const sortAnchorTag = document.querySelector('.sort-container')
 console.log(sortAnchorTag)
-////// sort on click
+////// sort on click//////////////////////////////////////////////////////////////////////
 sortAnchorTag.addEventListener('click',()=>{
-    boody.classList.toggle('no-scroll') 
+   bodyElement.classList.toggle('no-scroll') 
 createELE('div','header','sort-div-fixed')
-const sortDivFixed = document.querySelector('.sort-div-fixed')
-sortDivFixed.innerHTML = `<div class="sort-div-fixed-chid"><div class="sort-by-div-first-child">${sortByFixed[0]}</div><div class="fixed-border-div"></div><div class="sort-by-fixed-div-child-three"></div></div></div>`
+const sortMenuFixedDiv = document.querySelector('.sort-div-fixed')
+sortMenuFixedDiv.innerHTML = `<div class="sort-div-fixed-chid"><div class="sort-by-div-first-child">${sortByMenuOptions[0]}</div><div class="fixed-border-div"></div><div class="sort-by-fixed-div-child-three"></div></div></div>`
 
 
 
 for(let i = 0;i <4 ;i++){
-    const sortByChildThree = document.querySelector('.sort-by-fixed-div-child-three')
+    const sortMenuOptions = document.querySelector('.sort-by-fixed-div-child-three')
 
-    let createElm = document.createElement('div')
-    let createElmTwo = document.createElement('div')
-    let createElmFour = document.createElement('div')
-    createElmFour.innerHTML = `${sortByFixed[i+1]}`
-    createElmFour.classList.add('sort-text-container-div')
-    createElm.appendChild(createElmTwo)
-createElmTwo.appendChild(createElmFour)
+    let sortMenucreateElement = document.createElement('div')
+    let sortMenucreateElementTwo = document.createElement('div')
+    let sortMenucreateElementFour = document.createElement('div')
+    sortMenucreateElementFour.innerHTML = `${sortByMenuOptions[i+1]}`
+    sortMenucreateElementFour.classList.add('sort-text-container-div')
+    sortMenucreateElement.appendChild(sortMenucreateElementTwo)
+sortMenucreateElementTwo.appendChild(sortMenucreateElementFour)
 
-    let createElmThree = document.createElement('div')
-    createElm.appendChild(createElmThree)
-    createElmThree.classList.add('fixed-sort-by-icon')
-    createElmThree.innerHTML = `<img src="${sortByFixedImg[0]}">`
+    let sortMenucreateElementThree = document.createElement('div')
+    sortMenucreateElement.appendChild(sortMenucreateElementThree)
+    sortMenucreateElementThree.classList.add('fixed-sort-by-icon')
+    sortMenucreateElementThree.innerHTML = `<img src="${sortByMenuOptionsImg[0]}">`
     
-    createElm.classList.add('sort-by-fixed-child-three')
-    console.log(createElm)
-      sortByChildThree.appendChild(createElm)
+    sortMenucreateElement.classList.add('sort-by-fixed-child-three')
+    console.log(sortMenucreateElement)
+      sortMenuOptions.appendChild(sortMenucreateElement)
 
 const hideDiv = document.querySelector(".sort-div-fixed")                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
  console.log(hideDiv)
 hideDiv.addEventListener('click',function fooi(){
-    boody.classList.remove('no-scroll') 
+   bodyElement.classList.remove('no-scroll') 
     console.log('removedone')
 setTimeout(()=>{
     hideDiv.remove('sort-div-fixed')
 },300)
 })
 
-// let createDiv = sortByChildThree.appendChild('createElm')
-// createElm.classList.add('sorting-third-child-child')
+// let createDiv = sortMenuOptions.appendChild('sortMenucreateElement')
+// sortMenucreateElement.classList.add('sorting-third-child-child')
 
 }
 
-const sortByFixedChildThree = document.querySelectorAll('.sort-by-fixed-child-three')
-sortByFixedChildThree[1].addEventListener('click',(a)=>{
+const sortByMenuOptionsChildThree = document.querySelectorAll('.sort-by-fixed-child-three')
+sortByMenuOptionsChildThree[1].addEventListener('click',(a)=>{
+    const mobileCardsParentContainer= document.querySelector('.section-main-container')
+    mobileCardsParentContainer.innerHTML = ``
+    let l = 0
+        for(indexLowToHigh[l];l<discount.length;indexLowToHigh[l+1]){
+            let i = parseInt(indexLowToHigh[l])
+            console.log('hiii')
+            mobileCardsParentContainer.innerHTML +=`<div class ="section-card-main-container">
+                                          <div class="card-first-section">                   
+                                            <div class="card-first-section-mobile-image" data-rating="${rating[i]}"><img src ="${mobileCardImages[i]}"> </div>
+                                            <div class="card-first-section-flex-container">
+                                            <div class="card-luv-logo"><div class="luv-svg-container"><img src="${luvSvg}"></div></div>
+                                            <div class="card-second-section-container"><div class="second-card-mobile-details">${name[i]}</div><div class="second-card-second-child"><div class="popularity"><div class="second-card-second-child-first-child"><div class="second-card-second-child-first-child-rating">${rating[i]}</div><div class="second-card-second-child-first-child-logo">${ratingLogo}</div></div><div class="rated-count">${ratingNumber[i]}</div></div><div></div><div class="second-card-second-child-second-child"><img src="${logo}"></div></div><div class="second-section-third-child-flex"><div class="second-card-third-child"><div class="second-card-third-child-price">${priceCalc[i]}</div><div class="third-child-discount-price">${discountPriceArray}</div><div class="second-card-third-child-text">${discount[i]}${discountTag}</div></div><div class="delivery-status">${deliveryStatus}</div></div><div class="second-card-last-child">${offer[i]}</div></div>
+                                          </div></div>
+                                          <div class="card-second-section">
+                                          <div class="card-second-section-child">
+                                          <div class="card-second-section-child-child">${deviceSpec[i]}</div></div>
+                        
+                                           <div class="card-second-section-child">
+                                           <div class="card-second-section-child-child">${deviceDim[i]}
+                                           </div>
+                                           </div>
+                                           <div class="card-second-section-child">
+                                           <div class="card-second-section-child-child">${battery[i]}</div></div>                  
+                                           <div class="card-second-section-child">
+                                           <div class="card-second-section-child-child">${camera[i]}</div>                                  
+                                          </div>`
+                                            mobileCardDiscountPrice = document.querySelectorAll('.third-child-discount-price')
+                                            discount[i] = parseInt(discount[i]) 
+                                            console.log(typeof discount[i])                      
+                                            if(discount[i]===0){
+                                                let requiredIndex = i
+                                                console.log(i)
+                                                const secondCardThirdChild = document.querySelectorAll('.second-card-third-child-text')
+                                                const marginZero = document.querySelectorAll('.third-child-discount-price')
+                                                const secondCard = document.querySelectorAll(".second-card-third-child-price")
+                                                secondCard.forEach((a,i)=>{                 
+                                                     a.style.display = "none"                  
+                                                })
+                                                marginZero.forEach((a)=>{
+                                                            a.style.marginLeft = "0"  
+                                                            console.log(a)                                             
+                                                })
+                                             secondCardThirdChild.forEach((a,i)=>{
+                                                console.log(a)
+                                    a.style.display ="none"  
+                                             })
+                                                console.log(secondCard)
+                                            }
+                                            if(emiAvailable[i]!="null"){
+                                            const addEmiField = document.querySelectorAll('.card-second-section-container')
+                                            console.log(addEmiField)
+                                            addEmiField.forEach((a,i)=>{
+                                                console.log('hiiii')
+                                                if(emiAvailable[i]!="null"){
+                                                a.innerHTML += `<div class="emi-text">${exchangeText}</div><div class="card-emi-details">${emiTag}</div>`}
+                                            })
+                                            const changeHeight = document.querySelectorAll('.card-first-section')
+                                            const secondCardLastChild = document.querySelectorAll(".second-card-last-child")
+                                            secondCardLastChild.forEach((a,i)=>{
+                                                if(emiAvailable[i]!="null"){
+                                                    a.style.display = "none"
+                                                   }
+                                            })
+                                            changeHeight.forEach((a,i)=>{
+                                               if(emiAvailable[i]!="null"){
+                                                a.style.height = "162px";
+                                               }
+                                            })
+                                            }
+                                        l=l+1
+                                      if(l===discount.length){
+                                        addPriceTagFun()
+                                        return 0
+                                      }
+                                    }
 
 })
-sortByFixedChildThree[2].addEventListener('click',(a)=>{
-    const sectionMainContainer= document.querySelector('.section-main-container')
-sectionMainContainer.innerHTML = ``
+sortByMenuOptionsChildThree[2].addEventListener('click',(a)=>{
+    const mobileCardsParentContainer= document.querySelector('.section-main-container')
+mobileCardsParentContainer.innerHTML = ``
 let h = 0
-
-
-    for(indexForPriceSorting[h];h<6;indexForPriceSorting[h+1]){
+    for(indexForPriceSorting[h];h<discount.length;indexForPriceSorting[h+1]){
         let i = parseInt(result[h])
         console.log('hiii')
-        sectionMainContainer.innerHTML +=`<div class ="section-card-main-container">
-                                      <div class="card-first-section">
-                                    
-                                        <div class="card-first-section-mobile-image" data-rating="${rating[i]}"><img src ="${imageData[i]}"> </div>
+        mobileCardsParentContainer.innerHTML +=`<div class ="section-card-main-container">
+                                      <div class="card-first-section">                   
+                                        <div class="card-first-section-mobile-image" data-rating="${rating[i]}"><img src ="${mobileCardImages[i]}"> </div>
                                         <div class="card-first-section-flex-container">
                                         <div class="card-luv-logo"><div class="luv-svg-container"><img src="${luvSvg}"></div></div>
                                         <div class="card-second-section-container"><div class="second-card-mobile-details">${name[i]}</div><div class="second-card-second-child"><div class="popularity"><div class="second-card-second-child-first-child"><div class="second-card-second-child-first-child-rating">${rating[i]}</div><div class="second-card-second-child-first-child-logo">${ratingLogo}</div></div><div class="rated-count">${ratingNumber[i]}</div></div><div></div><div class="second-card-second-child-second-child"><img src="${logo}"></div></div><div class="second-section-third-child-flex"><div class="second-card-third-child"><div class="second-card-third-child-price">${priceCalc[i]}</div><div class="third-child-discount-price">${discountPriceArray}</div><div class="second-card-third-child-text">${discount[i]}${discountTag}</div></div><div class="delivery-status">${deliveryStatus}</div></div><div class="second-card-last-child">${offer[i]}</div></div>
@@ -184,7 +253,7 @@ let h = 0
                                        <div class="card-second-section-child">
                                        <div class="card-second-section-child-child">${camera[i]}</div>                                  
                                       </div>`
-                                        marginsZero = document.querySelectorAll('.third-child-discount-price')
+                                        mobileCardDiscountPrice = document.querySelectorAll('.third-child-discount-price')
                                         discount[i] = parseInt(discount[i]) 
                                         console.log(typeof discount[i])                      
                                         if(discount[i]===0){
@@ -228,28 +297,28 @@ let h = 0
                                         })
                                         }
                                     h=h+1
-                                  if(h===6){
-                                    callStyleFun()
+                                  if(h===discount.length){
+                                    addPriceTagHighToLow()
                                     return 0
                                   }
                                 }
 })
-sortByFixedChildThree[0].addEventListener('click',(a)=>{
+sortByMenuOptionsChildThree[0].addEventListener('click',(a)=>{
 
-    const sectionMainContainer= document.querySelector('.section-main-container')
+    const mobileCardsParentContainer= document.querySelector('.section-main-container')
 
     let d = 0
-sectionMainContainer.innerHTML = ``
+mobileCardsParentContainer.innerHTML = ``
     
-    for(result[d];d<6;result[d+1]){
+    for(result[d];d<discount.length;result[d+1]){
        
        let i =parseInt(result[d])
     
        
-console.log(imageData[i])
-    sectionMainContainer.innerHTML +=`<div class ="section-card-main-container">
+console.log(mobileCardImages[i])
+    mobileCardsParentContainer.innerHTML +=`<div class ="section-card-main-container">
                                          <div class="card-first-section">
-                                           <div class="card-first-section-mobile-image" data-rating="${rating[i]}"><img src ="${imageData[i]}"> </div>
+                                           <div class="card-first-section-mobile-image" data-rating="${rating[i]}"><img src ="${mobileCardImages[i]}"> </div>
                                            <div class="card-first-section-flex-container">
                                            <div class="card-luv-logo"><div class="luv-svg-container"><img src="${luvSvg}"></div></div>
                                            <div class="card-second-section-container"><div class="second-card-mobile-details">${name[i]}</div><div class="second-card-second-child"><div class="popularity"><div class="second-card-second-child-first-child"><div class="second-card-second-child-first-child-rating">${rating[i]}</div><div class="second-card-second-child-first-child-logo">${ratingLogo}</div></div><div class="rated-count">${ratingNumber[i]}</div></div><div></div><div class="second-card-second-child-second-child"><img src="${logo}"></div></div><div class="second-section-third-child-flex"><div class="second-card-third-child"><div class="second-card-third-child-price">${priceCalc[i]}</div><div class="third-child-discount-price">${discountPriceArray}</div><div class="second-card-third-child-text">${discount[i]}${discountTag}</div></div><div class="delivery-status">${deliveryStatus}</div></div><div class="second-card-last-child">${offer[i]}</div></div>
@@ -266,10 +335,10 @@ console.log(imageData[i])
                                          <div class="card-second-section-child">
                                          <div class="card-second-section-child-child">${camera[i]}</div>                                  
                                         </div>`
-                                         marginsZero = document.querySelectorAll('.third-child-discount-price')
+                                         mobileCardDiscountPrice = document.querySelectorAll('.third-child-discount-price')
                                     //    arrey = [];
-                                    //     for (var f = 0, ref = arrey.length = marginsZero.length; f < ref; f++) {
-                                    //      arrey[f] = marginsZero[f];
+                                    //     for (var f = 0, ref = arrey.length = mobileCardDiscountPrice.length; f < ref; f++) {
+                                    //      arrey[f] = mobileCardDiscountPrice[f];
                                     //      console.log(arrey)
                                     //     }
                                         
@@ -281,7 +350,7 @@ discount[i] = parseInt(discount[i])
      const secondCardThirdChild = document.querySelectorAll('.second-card-third-child-text')
      const marginZero = document.querySelectorAll('.third-child-discount-price')
      const secondCard = document.querySelectorAll(".second-card-third-child-price")
-     secondCard.forEach((a,i)=>{                 
+     secondCard.forEach((a,requiredIndex)=>{                 
           a.style.display = "none"                  
      })
      marginZero.forEach((a)=>{
@@ -316,21 +385,21 @@ discount[i] = parseInt(discount[i])
             })
             }
             d = d+1
-    if(d===6){
+    if(d===discount.length){
         console.log('hii')
-        coo()
+       addPriceSortPopularity()
         return 0
     }
     console.log('hiii')
     }
  console.log('huray')
 })
-sortByFixedChildThree.forEach((a)=>{a.addEventListener('click',()=>{
+sortByMenuOptionsChildThree.forEach((a)=>{a.addEventListener('click',()=>{
  
-    const sortByFixedIcon = a.querySelectorAll('.fixed-sort-by-icon')
-sortByFixedIcon[0].innerHTML = `<img src="${sortByFixedImg[1]}">`
-console.log(sortByFixedIcon)
-console.log(sortByFixedImg[1])
+    const sortByMenuOptionsIcon = a.querySelectorAll('.fixed-sort-by-icon')
+sortByMenuOptionsIcon[0].innerHTML = `<img src="${sortByMenuOptionsImg[1]}">`
+console.log(sortByMenuOptionsIcon)
+console.log(sortByMenuOptionsImg[1])
 fooi()
 function fooi(){
     console.log('removed')
@@ -351,8 +420,8 @@ setTimeout(()=>{
 //  createELE('div','.sort-div-first-child','sort-by-div')
 // const data = document.querySelector('.sort-by-div')
 // console.log(data)
-// console.log(sortByFixed[0])
-// data.innerHTML = `${sortByFixed[0]}`
+// console.log(sortByMenuOptions[0])
+// data.innerHTML = `${sortByMenuOptions[0]}`
 // const fixedSort = document.querySelector('.sort-div-fixed-child')
 // fixedSort.innerHTML += `<div class="sort-div-second-child></div>`
 
@@ -396,7 +465,7 @@ numbers.map((a,i)=>{
 // if(a[i]===numbrsTwo[i]){
 //     console.log('hii')
 // }    savingg index for popularityyyy
-for(let b=0;b<7;b++){
+for(let b=0;b<discount.length;b++){
  if(a===numbrsTwo[b]){
     console.log('hellooo')
     arr3 += b
@@ -410,10 +479,10 @@ console.log(arr3)
 let arr4 = arr3.split('')
 console.log(arr4)
 for (let i = 0; i < arr4.length; ++i) {
-    if (arr4[i] == arr4[i + 4] || (arr4[i]==arr4[i+2])) continue
+    if (arr4[i] == arr4[i + 8] || (arr4[i]==arr4[i+2])) continue
     result.push(arr4[i])
   }
-
+console.log(result)
   //////// for price high to low
   
 
@@ -440,10 +509,10 @@ console.log(sortedArray)
 //     }
 //  }
 sortedArray.map((a,i)=>{
-    for(let g=0;g<7;g++){
+    for(let g=0;g<discount.length;g++){
         if(a===realPriceNewNewNumber[g]){
             console.log(g)
-            indexForPriceSorting+=parseInt(g)
+            indexForPriceSorting += parseInt(g)
             
         }
     }
@@ -453,7 +522,26 @@ indexForPriceSorting = indexForPriceSorting.split('')
 
 console.log(indexForPriceSorting)
 
-///////// for price high  
+///////// for price low to high////////////////
+mobilePrice = mobilePrice.map(Number)
+mobilePriceTwo = mobilePriceTwo.map(Number)
+console.log(mobilePrice)
+mobilePriceSorted = mobilePrice.sort((a,b)=>{
+    return a-b
+})
+console.log(discount.length)
+console.log(mobilePriceSorted)
+mobilePriceSorted.map((a,i)=>{
+    for(let l =0;l<discount.length;l++){
+        if(a===mobilePriceTwo[l]){
+            console.log(l)
+            indexLowToHigh +=parseInt(l)
+        }
+    }
+})
+indexLowToHigh = indexLowToHigh.split('')
+
+console.log(indexLowToHigh)
 
 
 
@@ -463,12 +551,12 @@ const body = document.querySelector('body')
 const sectionBody = document.createElement('section')
 body.appendChild(sectionBody)
 sectionBody
-sectionBody.innerHTML = `<div class="image-div-ad"><img src="${srcAd}"></div><div class="section-main-container"></div>`
+sectionBody.innerHTML = `<div class="image-div-ad"><img src="${advertisementImgSrc}"></div><div class="section-main-container"></div>`
 for(let i = 0;i<rating.length; i++){
-    const sectionMainContainer = sectionBody.querySelector('.section-main-container')
+    const mobileCardsParentContainer = sectionBody.querySelector('.section-main-container')
 
     if(i===2){
-        sectionMainContainer.innerHTML += `<div class="top-sale-deals-container"><div class="top-sale-deals-conatainer-child"><div class="top-sale-deals-content-container"><div class="image-top-deals"><img src="${imageTopDeals[0]}"></div><div class="top-deals-text"><div class="top-deals-flex-container-one">${topDealsText[0]}</div><div class="top-deals-flex-container-two">${topDealsText[1]}</div></div><div class="arrow-top-deals"><img src="${imageTopDeals[1]}"></div></div></div></div>`
+        mobileCardsParentContainer.innerHTML += `<div class="top-sale-deals-container"><div class="top-sale-deals-conatainer-child"><div class="top-sale-deals-content-container"><div class="image-top-deals"><img src="${imageTopDeals[0]}"></div><div class="top-deals-text"><div class="top-deals-flex-container-one">${topDealsText[0]}</div><div class="top-deals-flex-container-two">${topDealsText[1]}</div></div><div class="arrow-top-deals"><img src="${imageTopDeals[1]}"></div></div></div></div>`
     }
     let discountAmount = (priceCalc[i] * discount[i])/100
     console.log(discountAmount)
@@ -493,10 +581,10 @@ for(let i = 0;i<rating.length; i++){
      }
 
 
-sectionMainContainer.innerHTML += `<div class ="section-card-main-container">
+mobileCardsParentContainer.innerHTML += `<div class ="section-card-main-container">
                                      <div class="card-first-section">
                                     
-                                       <div class="card-first-section-mobile-image" data-rating="${rating[i]}"><img src ="${imageData[i]}"> </div>
+                                       <div class="card-first-section-mobile-image" data-rating="${rating[i]}"><img src ="${mobileCardImages[i]}"> </div>
                                        <div class="card-first-section-flex-container">
                                        <div class="card-luv-logo"><div class="luv-svg-container"><img src="${luvSvg}"></div></div>
                                        <div class="card-second-section-container"><div class="second-card-mobile-details">${name[i]}</div><div class="second-card-second-child"><div class="popularity"><div class="second-card-second-child-first-child"><div class="second-card-second-child-first-child-rating">${rating[i]}</div><div class="second-card-second-child-first-child-logo">${ratingLogo}</div></div><div class="rated-count">${ratingNumber[i]}</div></div><div></div><div class="second-card-second-child-second-child"><img src="${logo}"></div></div><div class="second-section-third-child-flex"><div class="second-card-third-child"><div class="second-card-third-child-price">${priceCalc[i]}</div><div class="third-child-discount-price">${discountPriceArray}</div><div class="second-card-third-child-text">${discount[i]}${discountTag}</div></div><div class="delivery-status">${deliveryStatus}</div></div><div class="second-card-last-child">${offer[i]}</div></div>
@@ -575,46 +663,52 @@ sectionMainContainer.innerHTML += `<div class ="section-card-main-container">
                                         a.style.height = "162px";
                                        }
                                     })
-                                    }
-                                    
-                                    
+                                    }         
 }
 let d = 0
 
-function coo(){
+function addPriceSortPopularity(){
 
-    for(let i =0; i<marginsZero.length;i++){
-       
-        let i =parseInt(result[d])
+    for(let i =0; i<mobileCardDiscountPrice.length;i++){
         console.log(typeof i)
-    console.log(marginsZero)
+    console.log(mobileCardDiscountPrice)
    
-    marginsZero[0].innerHTML = `₹${priceCalc[2]}`
-    marginsZero[1].innerHTML = `₹${priceCalc[3]}`
-    marginsZero[2].innerHTML =`₹${priceCalc[4]}`
-    marginsZero[3].innerHTML =`₹${priceCalc[5]}`
-    marginsZero[4].innerHTML =`${arrayElem[0]}`
-    marginsZero[5].innerHTML =`${arrayElem[1]}`
+    mobileCardDiscountPrice[i].innerHTML = `₹${priceCalc[result[i]]}`
+    // mobileCardDiscountPrice[1].innerHTML = `₹${priceCalc[3]}`
+    // mobileCardDiscountPrice[2].innerHTML =`₹${priceCalc[4]}`
+    // mobileCardDiscountPrice[3].innerHTML =`₹${priceCalc[5]}`
+    // mobileCardDiscountPrice[4].innerHTML =`${arrayElem[0]}`
+    // mobileCardDiscountPrice[5].innerHTML =`${arrayElem[1]}`
     
 
 
     d=d+1
-    if(d===6){
+    if(d===discount.length){
         return 0
     }
     
 }
 }
-function callStyleFun(){
+function addPriceTagHighToLow(){
 
-    for(let i=0; i<marginsZero.length;i++){
-        let i = parseInt(indexForPriceSorting[d])
-        marginsZero[0].innerHTML = `₹${priceCalc[2]}`
-        marginsZero[1].innerHTML = `₹${priceCalc[3]}`
-        marginsZero[2].innerHTML =`₹${priceCalc[5]}`
-        marginsZero[3].innerHTML =`₹${priceCalc[4]}`
-        marginsZero[4].innerHTML =`${arrayElem[0]}`
-        marginsZero[5].innerHTML =`${arrayElem[1]}`
+    for(let i=0; i<mobileCardDiscountPrice.length;i++){
+        mobileCardDiscountPrice[i].innerHTML = `₹${priceCalc[indexForPriceSorting[i]]}`
+        // mobileCardDiscountPrice[1].innerHTML = `₹${priceCalc[3]}`
+        // mobileCardDiscountPrice[2].innerHTML =`₹${priceCalc[5]}`
+        // mobileCardDiscountPrice[3].innerHTML =`₹${priceCalc[4]}`
+        // mobileCardDiscountPrice[4].innerHTML =`${arrayElem[0]}`
+        // mobileCardDiscountPrice[5].innerHTML =`${arrayElem[1]}`
+    }
+}
+function addPriceTagFun(){
+
+    for(let i=0; i<mobileCardDiscountPrice.length;i++){
+        mobileCardDiscountPrice[i].innerHTML = `₹${priceCalc[indexLowToHigh[i]]}`
+        // mobileCardDiscountPrice[1].innerHTML = `₹${priceCalc[0]}`
+        // mobileCardDiscountPrice[2].innerHTML =`₹${priceCalc[4]}`
+        // mobileCardDiscountPrice[3].innerHTML =`₹${priceCalc[5]}`
+        // mobileCardDiscountPrice[4].innerHTML =`${arrayElem[3]}`
+        // mobileCardDiscountPrice[5].innerHTML =`${arrayElem[2]}`
     }
 }
 
